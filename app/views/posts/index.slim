@@ -1,0 +1,11 @@
+h1 Root tree
+
+ul 
+  - @posts.each do |post|
+    li =link_to post.name, post_path(post.url)
+
+br
+br
+  =link_to 'Создать родителя', new_parent_path
+br
+br

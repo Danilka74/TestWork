@@ -1,0 +1,14 @@
+h2 Form for create Post
+
+.row
+  .col-6
+    =form_for @post do |f|
+      =f.hidden_field :parent_id, value: @parent.id if @parent
+      .form-group
+        =f.text_field :title , placeholder: 'Title', class: "form-control"
+      .form-group
+        =f.text_field :name , placeholder: 'Name', class: "form-control"
+      .form-group
+        =f.text_area :body , placeholder: 'Text', class: "form-control"
+      .form-group
+        =f.submit "Создать", class: "btn btn-primary"
