@@ -1,8 +1,8 @@
 h1 Root tree
 
-ul 
+ul.list-group
   - @posts.each do |post|
-    li =link_to post.name, post_path(post.url)
+    li.list-group-item =link_to post.name, post_path(post.url)
 
 br
 br

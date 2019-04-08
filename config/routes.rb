@@ -2,11 +2,13 @@ Rails.application.routes.draw do
 
   root 'posts#index'
 
-  # case sensitive
-  get '/add' => 'posts#new',      as: 'new_parent'
-  get '/*url/add' => 'posts#new', as: 'new_child'
-  get '/*url' => 'posts#show',    as: 'post'
+  get '/add',       to: 'posts#new',   as: 'new_parent'
+  get '/*url/add',  to: 'posts#new',   as: 'new_child'
+  get '/*url/edit', to: 'posts#edit',  as: 'edit_post'
+  get '/*url',      to: 'posts#show',  as: 'post'
+  patch '/*url',    to: 'posts#update'
+  put '/*url',      to: 'posts#update'
 
-  resources :posts, only: [:index, :create, :edit, :update]
+  resources :posts, only: [:index, :create]
   
 end

@@ -1,8 +1,8 @@
-h2 Form for create Post
+h2 Form for edit Post
 
 .row
   .col-6
-    =form_for @post do |f|
+    =form_for @post, as: :post, url: { action: "update" }, method: :patch do |f|
       =f.hidden_field :parent_id, value: @parent.id if @parent
       .form-group
         =f.text_field :name,  placeholder: 'Name(url)', class: "form-control"
@@ -11,4 +11,4 @@ h2 Form for create Post
       .form-group
         =f.text_area  :body,  placeholder: 'Text',      class: "form-control"
       .form-group
-        =f.submit "Создать", class: "btn btn-primary"
+        =f.submit "Изменить", class: "btn btn-primary"

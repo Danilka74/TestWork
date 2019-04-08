@@ -1,7 +1,16 @@
 h2 =@post.title
 
-p =@post.body
+p = show_content(@post)
 
 =link_to 'Создать ребенка', new_child_path
 br
+=link_to 'Редактировать', edit_post_path
+br
 =link_to 'На главную', root_path
+
+br
+br
+
+ul.list-group
+  - @childrens.each do |child|
+    li.list-group-item =link_to child.name , post_path(child.url)
