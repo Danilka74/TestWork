@@ -1,35 +1,32 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
 
-  context 'validation tests' do
+  context 'validation url' do
 
-    it 'title presence' do
-      post = Post.create(body: 'Text')
-      expect(post.errors.include?(:title)).to eq(true)
-    end
-
-    it 'body presence' do
-      post = Post.create(title: 'Title')
-      expect(post.errors.include?(:body)).to eq(true)
+    it 'url presence?' do
+      post = Post.create(title: 'Title',body: 'Text')
+      expect(post.errors.include?(:url)).to eq(true)
     end
 
     it 'should save successfully' do
-      post = FactoryBot.create(:post)
+      post = Post.create(title: 'Title',body: 'Text', name: 'Name')
       expect(post.errors.size).to eq(0)
     end
 
   end
 
-  context 'scopes' do
-    it 'must be ordered by published DESC' do
-      post_one = FactoryBot.create(:post, published_at: 5.minutes.ago)
-      post_two = FactoryBot.create(:post, published_at: 2.minutes.ago)
-      
-      posts = Post.all
+  context 'URL generator' do
 
-      expect(posts.order('published_at desc').to_a).to eq([post_two, post_one])
+    it 'parent present' do
+      post_one = Post.create(title: 'Title', body: 'Text', name: 'Name')
+      post_two = post_one.children.create(title: 'Title2',body: 'Text2', name: 'Name2')
+      expect(post_two.url).to eq("name/name2")
+    end
+
+    it 'without parent' do
+      post = Post.create(title: 'Title',body: 'Text', name: 'Name', ancestry: nil)
+      expect(post.url).to eq("name")
     end
 
   end

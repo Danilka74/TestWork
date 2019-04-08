@@ -15,7 +15,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    #как проверять от текущего родителя
+
     @post = Post.new(post_params)
 
     if @post.save

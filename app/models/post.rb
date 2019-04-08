@@ -7,7 +7,7 @@ class Post < ApplicationRecord
   validates :name, format: { with: /\A[a-zа-я0-9_]+\z/i }
   validates :url, presence: true, uniqueness: true
 
-  #После того как изменилось имя 
+  #После того как изменилось имя меняет URL у всех детей
   after_commit do
     if saved_change_to_name?
       subtree.each &:update_url # cildren.each {|c| c.update_url}
